@@ -20,8 +20,6 @@ import {
 
 import "./App.css";
 import "./polish.css";
-import { useAnimatedCounter } from "./useAnimatedCounter";
-
 const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const INFERENCE_API =
   import.meta.env.VITE_INFERENCE_API_URL || "http://localhost:5001";
@@ -1549,8 +1547,7 @@ export default function App() {
   const [loading, setLoading] =
     useState(false);
 
-  const [analysisStage, setAnalysisStage] =
-    useState("READY");
+  const [, setAnalysisStage] = useState("READY");;
 
   const [inferences, setInferences] =
     useState<Record<string, Inference>>({});

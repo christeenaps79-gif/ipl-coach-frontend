@@ -7,6 +7,8 @@ import {
 } from "postprocessing";
 
 export class ParticlesSwarm {
+  private mount: HTMLDivElement;
+
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
@@ -30,7 +32,9 @@ export class ParticlesSwarm {
   private dummy = new THREE.Object3D();
   private color = new THREE.Color();
 
-  constructor(private mount: HTMLDivElement) {
+  constructor(mount: HTMLDivElement) {
+    this.mount = mount;
+
     this.scene = new THREE.Scene();
 
     /*
@@ -73,7 +77,7 @@ export class ParticlesSwarm {
      */
     this.renderer.setClearColor(0x000000, 0);
 
-    mount.appendChild(this.renderer.domElement);
+    this.mount.appendChild(this.renderer.domElement);
 
     this.renderer.domElement.style.position =
       "absolute";
