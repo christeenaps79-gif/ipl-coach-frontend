@@ -1,0 +1,17 @@
+.circuit-background {
+position: fixed;
+inset: 0;
+z-index: 0;
+pointer-events: none;
+background-image: url('/stumps-background.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.circuit-background::after {
+content: '';
+position: absolute;
+inset: 0;
+background: rgba(3, 7, 18, 0.18);
+}

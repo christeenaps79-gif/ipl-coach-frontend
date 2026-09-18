@@ -1,0 +1,574 @@
+.intro-animation {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #000;
+
+    z-index: 99999;
+}
+
+/* -----------------------------------------
+   THREE.JS
+----------------------------------------- */
+
+.intro-animation canvas {
+    position: absolute;
+
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* -----------------------------------------
+   STREAM SYSTEM
+----------------------------------------- */
+
+.stream-system {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 30;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        scale(0.97);
+
+    filter: blur(10px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.55s cubic-bezier(0.16,
+            1,
+            0.3,
+            1),
+        filter 0.45s ease;
+}
+
+.stream-system-visible {
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    filter: blur(0);
+}
+
+.stream-system-hidden {
+    opacity: 0;
+
+    transform:
+        translateX(-45px) scale(1.02);
+
+    filter: blur(10px);
+}
+
+/* -----------------------------------------
+   MOVING STREAM FIELD
+----------------------------------------- */
+
+.stream-field {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    overflow: hidden;
+
+    opacity: 0.72;
+
+    mask-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            black 14%,
+            black 86%,
+            transparent 100%);
+}
+
+/* -----------------------------------------
+   INDIVIDUAL STREAM ROW
+----------------------------------------- */
+
+.stream-row {
+    display: flex;
+
+    width: max-content;
+
+    white-space: nowrap;
+
+    animation-name:
+        streamScroll;
+
+    animation-timing-function:
+        linear;
+
+    animation-iteration-count:
+        infinite;
+
+    will-change:
+        transform;
+
+    font-family:
+        "Rajdhani",
+        "Arial Narrow",
+        sans-serif;
+
+    font-size:
+        clamp(12px,
+            1.15vw,
+            18px);
+
+    font-weight: 500;
+
+    letter-spacing:
+        5px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(178,
+            218,
+            201,
+            0.24);
+
+    text-shadow:
+        0 0 10px rgba(0,
+            255,
+            136,
+            0.12);
+}
+
+.stream-row span {
+    display: block;
+
+    padding-right: 100px;
+}
+
+@keyframes streamScroll {
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%);
+    }
+}
+
+/* -----------------------------------------
+   TARGET WORD
+----------------------------------------- */
+
+.target-word {
+    position: relative;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap;
+
+    font-family:
+        "Rajdhani",
+        "Eurostile",
+        "Bank Gothic",
+        "Arial Narrow",
+        sans-serif;
+
+    font-size:
+        clamp(40px,
+            6vw,
+            92px);
+
+    font-weight: 600;
+
+    letter-spacing:
+        clamp(5px,
+            1vw,
+            14px);
+
+    color:
+        rgba(238,
+            248,
+            243,
+            0.96);
+
+    text-shadow:
+        0 0 12px rgba(0,
+            255,
+            136,
+            0.5),
+        0 0 32px rgba(0,
+            255,
+            136,
+            0.22),
+        0 0 70px rgba(0,
+            255,
+            136,
+            0.1);
+}
+
+/* -----------------------------------------
+   TARGET LETTER
+----------------------------------------- */
+
+.target-character {
+    position: relative;
+
+    display: inline-block;
+
+    min-width: 0.55em;
+
+    opacity: 0;
+
+    transform:
+        translateX(75px) translateY(8px) scaleX(1.25) scaleY(0.8);
+
+    filter:
+        blur(7px);
+}
+
+/* -----------------------------------------
+   SCANNING LETTER
+----------------------------------------- */
+
+.target-character-scanning {
+    opacity: 0.75;
+
+    animation:
+        targetEnter 0.55s cubic-bezier(0.16,
+            1,
+            0.3,
+            1) forwards,
+
+        targetJitter 0.16s steps(2) infinite;
+}
+
+/* -----------------------------------------
+   LOCKED LETTER
+----------------------------------------- */
+
+.target-character-locked {
+    opacity: 1;
+
+    transform:
+        translateX(0) translateY(0) scaleX(1) scaleY(1);
+
+    filter:
+        blur(0);
+
+    animation:
+        targetLock 0.42s cubic-bezier(0.16,
+            1,
+            0.3,
+            1) forwards;
+}
+
+/* -----------------------------------------
+   INNER CHARACTER
+----------------------------------------- */
+
+.target-character-inner {
+    display: inline-block;
+
+    position: relative;
+}
+
+/* -----------------------------------------
+   CHARACTER ARRIVAL
+----------------------------------------- */
+
+@keyframes targetEnter {
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(85px) translateY(15px) scaleX(1.35) scaleY(0.75);
+
+        filter:
+            blur(9px);
+    }
+
+    35% {
+        opacity: 0.65;
+
+        transform:
+            translateX(28px) translateY(-7px) scaleX(1.12) scaleY(0.9);
+
+        filter:
+            blur(4px);
+    }
+
+    70% {
+        opacity: 0.85;
+
+        transform:
+            translateX(6px) translateY(4px) scaleX(1.03) scaleY(0.98);
+
+        filter:
+            blur(1px);
+    }
+
+    100% {
+        opacity: 0.85;
+
+        transform:
+            translateX(0) translateY(0) scaleX(1) scaleY(1);
+
+        filter:
+            blur(0);
+    }
+}
+
+/* -----------------------------------------
+   RAPID SCANNING MOVEMENT
+----------------------------------------- */
+
+@keyframes targetJitter {
+    0% {
+        transform:
+            translate(0,
+                0) scale(1);
+
+        opacity: 0.45;
+    }
+
+    20% {
+        transform:
+            translate(-3px,
+                -5px) scale(1.04);
+
+        opacity: 0.8;
+    }
+
+    40% {
+        transform:
+            translate(4px,
+                3px) scale(0.96);
+
+        opacity: 0.5;
+    }
+
+    60% {
+        transform:
+            translate(-2px,
+                4px) scale(1.03);
+
+        opacity: 0.9;
+    }
+
+    80% {
+        transform:
+            translate(3px,
+                -2px) scale(0.98);
+
+        opacity: 0.6;
+    }
+
+    100% {
+        transform:
+            translate(0,
+                0) scale(1);
+
+        opacity: 0.8;
+    }
+}
+
+/* -----------------------------------------
+   LOCK SNAP
+----------------------------------------- */
+
+@keyframes targetLock {
+    0% {
+        opacity: 0.5;
+
+        transform:
+            translate(5px,
+                -3px) scale(1.08);
+
+        filter:
+            blur(3px);
+    }
+
+    45% {
+        opacity: 1;
+
+        transform:
+            translate(-2px,
+                2px) scale(0.97);
+
+        filter:
+            blur(0.5px);
+    }
+
+    75% {
+        transform:
+            translate(1px,
+                -1px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(0,
+                0) scale(1);
+
+        filter:
+            blur(0);
+    }
+}
+
+/* -----------------------------------------
+   FINAL TITLE
+----------------------------------------- */
+
+.stream-system-final {
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    filter:
+        blur(0);
+}
+
+.stream-system-final .target-word {
+    font-size:
+        clamp(34px,
+            5.3vw,
+            82px);
+
+    font-weight: 700;
+
+    letter-spacing:
+        clamp(4px,
+            0.8vw,
+            11px);
+
+    text-shadow:
+        0 0 16px rgba(0,
+            255,
+            136,
+            0.55),
+        0 0 42px rgba(0,
+            255,
+            136,
+            0.25),
+        0 0 90px rgba(0,
+            255,
+            136,
+            0.12);
+}
+
+/* -----------------------------------------
+   SCAN LINE
+----------------------------------------- */
+
+.scan-line {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 50%;
+
+    height: 1px;
+
+    z-index: 40;
+
+    opacity: 0.22;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(0,
+                255,
+                136,
+                0.8),
+            transparent);
+
+    transform:
+        translateY(-50%);
+
+    animation:
+        scanPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scanPulse {
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-50%) scaleX(0.4);
+    }
+
+    50% {
+        opacity: 0.3;
+
+        transform:
+            translateY(-50%) scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(-50%) scaleX(0.4);
+    }
+}
+
+/* -----------------------------------------
+   MOBILE
+----------------------------------------- */
+
+@media (max-width: 700px) {
+    .stream-row {
+        font-size: 10px;
+
+        letter-spacing: 4px;
+    }
+
+    .target-word {
+        font-size: 29px;
+
+        letter-spacing: 3px;
+    }
+
+    .stream-field {
+        gap: 10px;
+    }
+
+    .stream-system-final .target-word {
+        font-size: 25px;
+
+        letter-spacing: 2px;
+    }
+}
