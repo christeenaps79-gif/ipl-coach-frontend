@@ -22,7 +22,7 @@ import "./App.css";
 import "./polish.css";
 const API = "";
 const INFERENCE_API =
-  import.meta.env.VITE_INFERENCE_API_URL || "http://localhost:5001";
+  import.meta.env.VITE_INFERENCE_API_URL || " ";
 
 /* ============================================================
    SYSTEM STYLES
