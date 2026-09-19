@@ -22,7 +22,7 @@ import "./App.css";
 import "./polish.css";
 const API = "";
 const INFERENCE_API =
-  import.meta.env.VITE_INFERENCE_API_URL || " ";
+  import.meta.env.VITE_INFERENCE_API_URL || "";
 
 /* ============================================================
    SYSTEM STYLES
