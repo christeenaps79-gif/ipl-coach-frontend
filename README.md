@@ -13,7 +13,7 @@ The goal is to turn historical IPL performance data into structured insights tha
 ## Live Demo
 
 **Frontend:**
-https://ipl-coach-frontend.vercel.app/
+https://stumps-coach-os.vercel.app/
 
 **GitHub:**
 https://github.com/christeenaps79-gif/ipl-coach-frontend
@@ -459,4 +459,5 @@ https://github.com/christeenaps79-gif/ipl-coach-frontend
 
 Live Demo:
 
-https://ipl-coach-frontend.vercel.app/
+https://stumps-coach-os.vercel.app/
+
