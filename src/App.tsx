@@ -20,7 +20,7 @@ import {
 
 import "./App.css";
 import "./polish.css";
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API = "";
 const INFERENCE_API =
   import.meta.env.VITE_INFERENCE_API_URL || "http://localhost:5001";
 

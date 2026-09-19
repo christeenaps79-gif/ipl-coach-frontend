@@ -364,7 +364,7 @@ function Dashboard() {
                       )
                         ? 'green'
                         : record.finalDecision ===
-                            'BALANCED'
+                          'BALANCED'
                           ? 'amber'
                           : 'red'
                     }
@@ -692,7 +692,7 @@ function Dashboard() {
 
               <div>
                 <Activity size={14} />
-                API: localhost:5000
+                API:""
               </div>
             </section>
           </div>
