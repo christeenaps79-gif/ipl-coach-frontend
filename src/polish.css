@@ -10,7 +10,7 @@
 .primary-button,
 .secondary-button {
   position: relative;
-  transition: 
+  transition:
     background 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
     transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.24s ease;
@@ -109,7 +109,7 @@
 .panel,
 .stat-card,
 .engine-card {
-  transition: 
+  transition:
     box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.3s ease;
@@ -117,7 +117,7 @@
 
 .stat-card:hover {
   transform: translateY(-3px);
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.2),
     0 0 1px rgba(114, 194, 161, 0.3);
   border-color: rgba(114, 194, 161, 0.25);
@@ -155,6 +155,7 @@
     opacity: 0.5;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -177,11 +178,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(114, 194, 161, 0.08),
-    transparent 80%
-  );
+  background: radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(114, 194, 161, 0.08),
+      transparent 80%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -192,7 +191,7 @@
   opacity: 1;
 }
 
-.hero > * {
+.hero>* {
   position: relative;
   z-index: 1;
 }
@@ -206,14 +205,16 @@
 }
 
 @keyframes pulse-dot {
+
   0%,
   100% {
-    box-shadow: 
+    box-shadow:
       0 0 0 0 rgba(114, 194, 161, 0.7),
       0 0 12px rgba(114, 194, 161, 0.8);
   }
+
   50% {
-    box-shadow: 
+    box-shadow:
       0 0 0 6px rgba(114, 194, 161, 0),
       0 0 12px rgba(114, 194, 161, 0.8);
   }
@@ -240,12 +241,10 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   animation: shimmer 2s infinite;
 }
 
@@ -253,6 +252,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -266,20 +266,44 @@
   animation: metric-fade 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
-.metric:nth-child(1) { animation-delay: 0s; }
-.metric:nth-child(2) { animation-delay: 0.05s; }
-.metric:nth-child(3) { animation-delay: 0.1s; }
-.metric:nth-child(4) { animation-delay: 0.15s; }
-.metric:nth-child(5) { animation-delay: 0.2s; }
-.metric:nth-child(6) { animation-delay: 0.25s; }
-.metric:nth-child(7) { animation-delay: 0.3s; }
-.metric:nth-child(8) { animation-delay: 0.35s; }
+.metric:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.metric:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.metric:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.metric:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.metric:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.metric:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+.metric:nth-child(7) {
+  animation-delay: 0.3s;
+}
+
+.metric:nth-child(8) {
+  animation-delay: 0.35s;
+}
 
 @keyframes metric-fade {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -292,15 +316,26 @@
 
 .audit-item {
   animation: audit-slide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-  transition: 
+  transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-.audit-item:nth-child(1) { animation-delay: 0s; }
-.audit-item:nth-child(3) { animation-delay: 0.1s; }
-.audit-item:nth-child(5) { animation-delay: 0.2s; }
-.audit-item:nth-child(7) { animation-delay: 0.3s; }
+.audit-item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.audit-item:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.audit-item:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.audit-item:nth-child(7) {
+  animation-delay: 0.3s;
+}
 
 .audit-item:hover {
   transform: translateY(-2px);
@@ -312,6 +347,7 @@
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -331,6 +367,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -351,6 +388,7 @@
     opacity: 0;
     transform: scale(0.9) translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -362,7 +400,7 @@
    -------------------------------------------------- */
 
 .tab {
-  transition: 
+  transition:
     color 0.3s ease,
     border-color 0.3s ease,
     background 0.3s ease;
@@ -385,6 +423,7 @@
     transform: scaleX(0);
     transform-origin: left;
   }
+
   to {
     transform: scaleX(1);
   }
@@ -395,7 +434,7 @@
    -------------------------------------------------- */
 
 .recommendation-icon {
-  transition: 
+  transition:
     transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.4s ease;
 }
@@ -411,10 +450,10 @@
 
 select:focus,
 input:focus {
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(160, 185, 205, 0.45),
     0 0 12px rgba(160, 185, 205, 0.15);
-  transition: 
+  transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
@@ -433,21 +472,36 @@ input:focus {
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.coach-layout > * {
+.coach-layout>* {
   animation: results-fade 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
-.coach-layout > :nth-child(1) { animation-delay: 0s; }
-.coach-layout > :nth-child(2) { animation-delay: 0.1s; }
-.coach-layout > :nth-child(3) { animation-delay: 0.2s; }
-.coach-layout > :nth-child(4) { animation-delay: 0.3s; }
-.coach-layout > :nth-child(5) { animation-delay: 0.4s; }
+.coach-layout> :nth-child(1) {
+  animation-delay: 0s;
+}
+
+.coach-layout> :nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.coach-layout> :nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.coach-layout> :nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.coach-layout> :nth-child(5) {
+  animation-delay: 0.4s;
+}
 
 /* --------------------------------------------------
    16. LEADER ROW STAGGER
@@ -457,17 +511,32 @@ input:focus {
   animation: leader-slide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
-.leader-row:nth-child(1) { animation-delay: 0s; }
-.leader-row:nth-child(2) { animation-delay: 0.06s; }
-.leader-row:nth-child(3) { animation-delay: 0.12s; }
-.leader-row:nth-child(4) { animation-delay: 0.18s; }
-.leader-row:nth-child(5) { animation-delay: 0.24s; }
+.leader-row:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.leader-row:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.leader-row:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.leader-row:nth-child(4) {
+  animation-delay: 0.18s;
+}
+
+.leader-row:nth-child(5) {
+  animation-delay: 0.24s;
+}
 
 @keyframes leader-slide {
   from {
     opacity: 0;
     transform: translateX(-16px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -484,11 +553,224 @@ input:focus {
    -------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================
+   STUMPS // COACH OS — FOREST GLASS THEME
+   Safe additive overrides.
+   Keeps existing intro layout and animations intact.
+   ========================================================== */
+
+:root {
+  --stumps-forest: #26382d;
+  --stumps-forest-deep: #151c17;
+  --stumps-sage: #829b83;
+  --stumps-sage-light: #a9bea7;
+  --stumps-stone: #dad9ce;
+  --stumps-glass: rgba(28, 39, 31, 0.68);
+  --stumps-glass-border: rgba(159, 184, 155, 0.17);
+  --stumps-green-glow: rgba(114, 160, 112, 0.13);
+}
+
+/* 1. Recolour the existing background, not the intro layout */
+.app {
+  background:
+    radial-gradient(circle at 85% 10%,
+      rgba(82, 119, 82, 0.12),
+      transparent 27%),
+    radial-gradient(circle at 10% 90%,
+      rgba(72, 104, 75, 0.09),
+      transparent 28%),
+    #101511;
+}
+
+html,
+body {
+  background: #101511;
+}
+
+/* 2. Keep the existing grid, with a softer forest tint */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(177, 199, 170, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(177, 199, 170, 0.025) 1px, transparent 1px);
+}
+
+/* 3. Forest-green brand accents */
+.brand-mark {
+  border-color: rgba(139, 172, 132, 0.38);
+  background: rgba(87, 123, 82, 0.12);
+  color: var(--stumps-sage-light);
+}
+
+.hero h1 span {
+  color: var(--stumps-sage);
+}
+
+/* The hero's existing mouse-reactive effect stays enabled.
+   Only its colour is adjusted. */
+.hero::before {
+  background: radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(126, 170, 116, 0.09),
+      transparent 80%);
+}
+
+/* 4. Glass navigation — existing sticky behavior is preserved */
+.tabs {
+  background: rgba(18, 25, 19, 0.84);
+  border-top-color: rgba(159, 184, 155, 0.09);
+  border-bottom-color: var(--stumps-glass-border);
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+}
+
+.tab.active {
+  border-bottom-color: var(--stumps-sage);
+  background: rgba(114, 151, 105, 0.09) !important;
+}
+
+.tab.active::after {
+  background: var(--stumps-sage);
+}
+
+.tab:focus-visible,
+button:focus-visible {
+  outline-color: rgba(157, 188, 148, 0.65);
+}
+
+/* 5. Liquid-glass panels below the intro */
+.content .panel,
+.content .stat-card,
+.content .engine-card {
+  background:
+    linear-gradient(145deg,
+      rgba(119, 146, 112, 0.055),
+      transparent 48%),
+    var(--stumps-glass);
+  border-color: var(--stumps-glass-border);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(221, 235, 215, 0.045);
+  backdrop-filter: blur(16px) saturate(115%);
+  -webkit-backdrop-filter: blur(16px) saturate(115%);
+}
+
+/* Restrained reflections on existing panel headings */
+.content .panel-title {
+  border-bottom-color: rgba(159, 184, 155, 0.11);
+}
+
+.content .panel-icon {
+  color: var(--stumps-sage-light);
+  border-color: rgba(139, 172, 132, 0.22);
+  background: rgba(87, 123, 82, 0.09);
+}
+
+/* 6. Keep existing hover animations; recolour their shadows */
+.content .stat-card:hover {
+  border-color: rgba(139, 172, 132, 0.32);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.22),
+    0 0 24px rgba(91, 133, 83, 0.07);
+}
+
+.content .engine-card:hover {
+  border-color: rgba(139, 172, 132, 0.3);
+}
+
+/* 7. Green primary actions, preserving button interactions */
+.primary-button {
+  border-color: rgba(151, 181, 143, 0.3);
+  background: linear-gradient(135deg, #789372, #405b42);
+  color: #f1f3eb;
+}
+
+.primary-button:hover {
+  box-shadow: 0 8px 22px rgba(85, 125, 77, 0.22);
+}
+
+.secondary-button {
+  border-color: rgba(159, 184, 155, 0.2);
+  background: rgba(113, 140, 105, 0.07);
+}
+
+.secondary-button:hover {
+  border-color: rgba(159, 184, 155, 0.36);
+  background: rgba(113, 140, 105, 0.13);
+}
+
+/* 8. Green focus state for existing form controls */
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: rgba(139, 172, 132, 0.55);
+  box-shadow: 0 0 0 1px rgba(139, 172, 132, 0.22);
+}
+
+/* 9. Existing progress and status effects use the new palette */
+.status-dot {
+  background: #91b18b;
+  box-shadow: 0 0 12px rgba(145, 177, 139, 0.55);
+}
+
+.leader-row:hover {
+  background: rgba(114, 160, 112, 0.07);
+}
+
+/* 10. Subtle scroll reveals for dashboard sections only.
+   Does not target .hero or change its existing effects. */
+@supports (animation-timeline: view()) {
+
+  .content>.configuration,
+  .content>.panel,
+  .content>.dashboard-grid {
+    animation: stumps-section-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 22%;
+  }
+
+  @keyframes stumps-section-reveal {
+    from {
+      opacity: 0.72;
+      transform: translateY(14px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* 11. Mobile glass and navigation support */
+@media (max-width: 700px) {
+  .tabs {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .content .panel,
+  .content .stat-card,
+  .content .engine-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Keep accessibility settings respected */
+@media (prefers-reduced-motion: reduce) {
+
+  .content>.configuration,
+  .content>.panel,
+  .content>.dashboard-grid {
+    animation: none;
   }
 }
