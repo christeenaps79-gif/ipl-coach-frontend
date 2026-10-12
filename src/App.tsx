@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import IntroAnimation from "./components/IntroAnimation";
-
+import OverAnalysis from "./components/OverAnalysis";
 import {
   Activity,
   BarChart3,
@@ -2370,6 +2370,11 @@ export default function App() {
               label: "COACH CALCULATION",
               icon: BrainCircuit,
             },
+            {
+              id: "over-analysis",
+              label: "OVER ANALYSIS",
+              icon: BarChart3,
+            },
           ].map((tab) => {
             const Icon = tab.icon;
 
@@ -2578,11 +2583,46 @@ export default function App() {
               }
             />
           )}
+          {activeTab === "coach" && (
+            <CoachCalculation
+              team={selectedTeam}
+              opponent={selectedOpponent}
+              venue={selectedVenue}
+              setTeam={handleTeamChange}
+              setOpponent={handleOpponentChange}
+              setVenue={handleVenueChange}
+              coach={coach}
+              loading={loading}
+              calculate={runCoachCalculation}
+              inference={inferences.coach}
+            />
+          )}
+
+          {activeTab === "coach" && (
+            <CoachCalculation
+              team={selectedTeam}
+              opponent={selectedOpponent}
+              venue={selectedVenue}
+              setTeam={handleTeamChange}
+              setOpponent={handleOpponentChange}
+              setVenue={handleVenueChange}
+              coach={coach}
+              loading={loading}
+              calculate={runCoachCalculation}
+              inference={inferences.coach}
+            />
+          )}
+
+          {activeTab === "over-analysis" && <OverAnalysis />}
         </section>
       </main>
     </div>
   );
 }
+
+/* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
 
 /* ============================================================
    SHARED COMPONENTS

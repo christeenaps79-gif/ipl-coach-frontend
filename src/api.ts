@@ -1,46 +1,38 @@
+
 const API_BASE_URL = "";
 
 export interface CoachRecommendationRecord {
   venue: string;
   team: string;
   opponent: string;
-
   venueWinPct: number;
   overallWinPct: number;
-
   matches: number;
   wins: number;
   losses: number;
   winPct: number;
-
   tossWins: number;
   tossLosses: number;
   tossWinMatchWins: number;
   tossWinMatchLosses: number;
   tossConversionPct: number;
-
   batFirst: number;
   batFirstWins: number;
   batFirstWinPct: number;
-
   fieldFirst: number;
   fieldFirstWins: number;
   fieldFirstWinPct: number;
-
   overallConfidence: string;
   recommendation: string;
   tossRecommendation: string;
   strategyRecommendation: string;
   venueConfidence: string;
-
   performanceScore: number;
   strategyBonus: number;
   tossBonus: number;
   finalScore: number;
-
   finalDecision: string;
   decisionConfidence: string;
-
   strategySignal: string;
   tossSignal: string;
 }
@@ -48,6 +40,24 @@ export interface CoachRecommendationRecord {
 interface ApiResponse {
   status: string;
   data: CoachRecommendationRecord;
+}
+
+export interface OverAnalysisRecord {
+  team: string;
+  over: number;
+  innings_count: number;
+  total_runs: number;
+  total_wickets: number;
+  avg_runs: number;
+  avg_wickets: number;
+}
+
+interface OverAnalysisResponse {
+  status: string;
+  count: number;
+  teams: string[];
+  team: string | null;
+  data: OverAnalysisRecord[];
 }
 
 export async function getCoachRecommendation(
@@ -76,4 +86,22 @@ export async function getCoachRecommendation(
   }
 
   return result.data;
+}
+
+export async function getOverAnalysis(): Promise<OverAnalysisResponse> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/over-analysis`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Over-analysis backend error: ${response.status}`);
+  }
+
+  const result: OverAnalysisResponse = await response.json();
+
+  if (result.status !== "success" || !Array.isArray(result.data)) {
+    throw new Error("Could not load Pig over-analysis data.");
+  }
+
+  return result;
 }
