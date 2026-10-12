@@ -1,776 +1,96 @@
 /* ============================================================
-   INTERACTIVE POLISH — PHASE 1
-   Subtle hover, click, and loading animations for STUMPS // COACH OS
+   STUMPS // COACH OS — SPATIAL GLASS POLISH
+   Visual-only layer for existing components.
+   Keeps the current React structure, data, charts and behaviour.
    ============================================================ */
 
-/* --------------------------------------------------
-   1. BUTTON HOVER & PRESS EFFECTS
-   -------------------------------------------------- */
-
-.primary-button,
-.secondary-button {
-  position: relative;
-  transition:
-    background 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
-    transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.24s ease;
-}
-
-.primary-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(181, 198, 212, 0.25);
-}
-
-.primary-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(181, 198, 212, 0.15);
-}
-
-.secondary-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.secondary-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* --------------------------------------------------
-   2. BUTTON RIPPLE EFFECT ON CLICK
-   -------------------------------------------------- */
-
-.primary-button::before,
-.secondary-button::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  opacity: 0;
-}
-
-.primary-button::before {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.secondary-button::before {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.primary-button:active::before,
-.secondary-button:active::before {
-  animation: ripple 0.6s ease-out;
-}
-
-@keyframes ripple {
-  to {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
-}
-
-/* --------------------------------------------------
-   3. LOADING STATE — RUN ANALYSIS SPINNER
-   -------------------------------------------------- */
-
-.primary-button.loading {
-  pointer-events: none;
-  opacity: 0.75;
-}
-
-.primary-button.loading::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(6, 16, 22, 0.3);
-  border-top-color: #061016;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-left: 6px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* --------------------------------------------------
-   4. CARD/PANEL DEPTH & HOVER
-   -------------------------------------------------- */
-
-.panel,
-.stat-card,
-.engine-card {
-  transition:
-    box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(114, 194, 161, 0.3);
-  border-color: rgba(114, 194, 161, 0.25);
-}
-
-.engine-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-  border-color: rgba(180, 205, 225, 0.35);
-}
-
-.panel:hover {
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
-}
-
-/* --------------------------------------------------
-   5. ANIMATED COUNTERS
-   -------------------------------------------------- */
-
-.stat-card strong {
-  display: inline-block;
-}
-
-.counter {
-  font-family: "IBM Plex Mono", monospace;
-  display: inline;
-}
-
-.counter-animate {
-  animation: count-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes count-up {
-  from {
-    opacity: 0.5;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --------------------------------------------------
-   6. HERO SECTION MOUSE REACTIVE GRADIENT
-   -------------------------------------------------- */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(114, 194, 161, 0.08),
-      transparent 80%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
-}
-
-.hero:hover::before {
-  opacity: 1;
-}
-
-.hero>* {
-  position: relative;
-  z-index: 1;
-}
-
-/* --------------------------------------------------
-   7. STATUS DOT PULSE ANIMATION
-   -------------------------------------------------- */
-
-.status-dot {
-  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse-dot {
-
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(114, 194, 161, 0.7),
-      0 0 12px rgba(114, 194, 161, 0.8);
-  }
-
-  50% {
-    box-shadow:
-      0 0 0 6px rgba(114, 194, 161, 0),
-      0 0 12px rgba(114, 194, 161, 0.8);
-  }
-}
-
-/* --------------------------------------------------
-   8. PROGRESS BAR ANIMATED FILL
-   -------------------------------------------------- */
-
-.progress div,
-.venue-bar div {
-  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.progress div {
-  position: relative;
-  overflow: hidden;
-}
-
-.progress div::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* --------------------------------------------------
-   9. METRIC CARDS STAGGER & FADE-IN
-   -------------------------------------------------- */
-
-.metric {
-  animation: metric-fade 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-}
-
-.metric:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.metric:nth-child(2) {
-  animation-delay: 0.05s;
-}
-
-.metric:nth-child(3) {
-  animation-delay: 0.1s;
-}
-
-.metric:nth-child(4) {
-  animation-delay: 0.15s;
-}
-
-.metric:nth-child(5) {
-  animation-delay: 0.2s;
-}
-
-.metric:nth-child(6) {
-  animation-delay: 0.25s;
-}
-
-.metric:nth-child(7) {
-  animation-delay: 0.3s;
-}
-
-.metric:nth-child(8) {
-  animation-delay: 0.35s;
-}
-
-@keyframes metric-fade {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --------------------------------------------------
-   10. AUDIT FLOW ITEM ANIMATIONS
-   -------------------------------------------------- */
-
-.audit-item {
-  animation: audit-slide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.audit-item:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.audit-item:nth-child(3) {
-  animation-delay: 0.1s;
-}
-
-.audit-item:nth-child(5) {
-  animation-delay: 0.2s;
-}
-
-.audit-item:nth-child(7) {
-  animation-delay: 0.3s;
-}
-
-.audit-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-@keyframes audit-slide {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --------------------------------------------------
-   11. DECISION BANNER HIGHLIGHT ANIMATION
-   -------------------------------------------------- */
-
-.decision-banner {
-  animation: banner-fade 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes banner-fade {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.banner-score strong {
-  animation: score-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-  display: inline-block;
-}
-
-.banner-score strong {
-  animation-delay: 0.3s;
-}
-
-@keyframes score-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* --------------------------------------------------
-   12. TAB ACTIVE INDICATOR ANIMATION
-   -------------------------------------------------- */
-
-.tab {
-  transition:
-    color 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
-  position: relative;
-}
-
-.tab.active::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #94a8ba;
-  animation: tab-indicator 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes tab-indicator {
-  from {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* --------------------------------------------------
-   13. RECOMMENDATION ICON ROTATION
-   -------------------------------------------------- */
-
-.recommendation-icon {
-  transition:
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.4s ease;
-}
-
-.recommendation:hover .recommendation-icon {
-  transform: rotateY(10deg) scale(1.05);
-  box-shadow: 0 8px 20px rgba(180, 205, 225, 0.2);
-}
-
-/* --------------------------------------------------
-   14. INPUT FOCUS GLOW
-   -------------------------------------------------- */
-
-select:focus,
-input:focus {
-  box-shadow:
-    0 0 0 1px rgba(160, 185, 205, 0.45),
-    0 0 12px rgba(160, 185, 205, 0.15);
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* --------------------------------------------------
-   15. SMOOTH FADE FOR ANALYSIS RESULTS
-   -------------------------------------------------- */
-
-.coach-layout,
-.battle-card {
-  animation: results-fade 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes results-fade {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.coach-layout>* {
-  animation: results-fade 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-}
-
-.coach-layout> :nth-child(1) {
-  animation-delay: 0s;
-}
-
-.coach-layout> :nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.coach-layout> :nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.coach-layout> :nth-child(4) {
-  animation-delay: 0.3s;
-}
-
-.coach-layout> :nth-child(5) {
-  animation-delay: 0.4s;
-}
-
-/* --------------------------------------------------
-   16. LEADER ROW STAGGER
-   -------------------------------------------------- */
-
-.leader-row {
-  animation: leader-slide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-}
-
-.leader-row:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.leader-row:nth-child(2) {
-  animation-delay: 0.06s;
-}
-
-.leader-row:nth-child(3) {
-  animation-delay: 0.12s;
-}
-
-.leader-row:nth-child(4) {
-  animation-delay: 0.18s;
-}
-
-.leader-row:nth-child(5) {
-  animation-delay: 0.24s;
-}
-
-@keyframes leader-slide {
-  from {
-    opacity: 0;
-    transform: translateX(-16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.leader-row:hover {
-  background: rgba(114, 194, 161, 0.04);
-  transition: background 0.3s ease;
-}
-
-/* --------------------------------------------------
-   17. REDUCED MOTION RESPECT
-   -------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ==========================================================
-   STUMPS // COACH OS — FOREST GLASS THEME
-   Safe additive overrides.
-   Keeps existing intro layout and animations intact.
-   ========================================================== */
-
 :root {
-  --stumps-forest: #26382d;
-  --stumps-forest-deep: #151c17;
-  --stumps-sage: #829b83;
-  --stumps-sage-light: #a9bea7;
-  --stumps-stone: #dad9ce;
-  --stumps-glass: rgba(28, 39, 31, 0.68);
-  --stumps-glass-border: rgba(159, 184, 155, 0.17);
-  --stumps-green-glow: rgba(114, 160, 112, 0.13);
-}
-
-/* 1. Recolour the existing background, not the intro layout */
-.app {
-  background:
-    radial-gradient(circle at 85% 10%,
-      rgba(82, 119, 82, 0.12),
-      transparent 27%),
-    radial-gradient(circle at 10% 90%,
-      rgba(72, 104, 75, 0.09),
-      transparent 28%),
-    #101511;
+  color-scheme: dark;
+  --stumps-bg: #080d0c;
+  --stumps-bg-soft: #0c1311;
+  --stumps-glass: rgba(17, 27, 23, 0.72);
+  --stumps-glass-strong: rgba(20, 31, 26, 0.88);
+  --stumps-glass-highlight: rgba(225, 239, 226, 0.055);
+  --stumps-border: rgba(174, 202, 179, 0.13);
+  --stumps-border-hover: rgba(174, 202, 179, 0.27);
+  --stumps-text: #e7eee8;
+  --stumps-muted: #9aa99e;
+  --stumps-dim: #718078;
+  --stumps-sage: #a4c4a4;
+  --stumps-sage-bright: #c1ddbf;
+  --stumps-sage-deep: #547b5d;
+  --stumps-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+  --stumps-radius: 18px;
+  --stumps-ease: cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 html,
 body {
-  background: #101511;
+  background: var(--stumps-bg);
+  color: var(--stumps-text);
 }
 
-/* 2. Keep the existing grid, with a softer forest tint */
+body {
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(94, 139, 104, 0.12), transparent 34%),
+    radial-gradient(ellipse at 92% 18%, rgba(95, 129, 113, 0.09), transparent 32%),
+    linear-gradient(180deg, #080d0c 0%, #0a100e 52%, #080d0c 100%);
+  background-attachment: fixed;
+}
+
+.app {
+  background:
+    radial-gradient(ellipse at 82% 5%, rgba(116, 155, 123, 0.08), transparent 28%),
+    radial-gradient(ellipse at 5% 45%, rgba(83, 124, 96, 0.055), transparent 35%),
+    transparent;
+  color: var(--stumps-text);
+}
+
+/* Existing grid becomes a low-contrast spatial drafting grid. */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(177, 199, 170, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(177, 199, 170, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(185, 211, 190, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185, 211, 190, 0.026) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 88%);
+  pointer-events: none;
 }
 
-/* 3. Forest-green brand accents */
+/* Brand and hero: preserve layout and content, refine contrast only. */
 .brand-mark {
-  border-color: rgba(139, 172, 132, 0.38);
-  background: rgba(87, 123, 82, 0.12);
-  color: var(--stumps-sage-light);
+  color: var(--stumps-sage-bright);
+  border-color: rgba(164, 196, 164, 0.26);
+  background: linear-gradient(145deg, rgba(138, 176, 142, 0.15), rgba(138, 176, 142, 0.035));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 28px rgba(98, 146, 105, 0.07);
+}
+
+.hero {
+  isolation: isolate;
+}
+
+.hero::before {
+  background: radial-gradient(560px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(147, 190, 151, 0.105), transparent 76%);
 }
 
 .hero h1 span {
-  color: var(--stumps-sage);
+  color: var(--stumps-sage-bright);
+  text-shadow: 0 0 34px rgba(146, 189, 149, 0.12);
 }
 
-/* The hero's existing mouse-reactive effect stays enabled.
-   Only its colour is adjusted. */
-.hero::before {
-  background: radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(126, 170, 116, 0.09),
-      transparent 80%);
-}
-
-/* 4. Glass navigation — existing sticky behavior is preserved */
+/* Navigation glass. Sticky positioning and tab logic remain unchanged. */
 .tabs {
-  background: rgba(18, 25, 19, 0.84);
-  border-top-color: rgba(159, 184, 155, 0.09);
-  border-bottom-color: var(--stumps-glass-border);
-  backdrop-filter: blur(22px) saturate(125%);
-  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  background: rgba(9, 15, 12, 0.78);
+  border-top-color: rgba(174, 202, 179, 0.06);
+  border-bottom-color: var(--stumps-border);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.13);
+  backdrop-filter: blur(24px) saturate(135%);
+  -webkit-backdrop-filter: blur(24px) saturate(135%);
 }
 
-.tab.active {
-  border-bottom-color: var(--stumps-sage);
-  background: rgba(114, 151, 105, 0.09) !important;
+.tab {
+  border-radius: 10px 10px 0 0;
+  transition: color 220ms ease, background 220ms ease, border-color 220ms ease;
 }
 
-.tab.active::after {
-  background: var(--stumps-sage);
-}
-
-.tab:focus-visible,
-button:focus-visible {
-  outline-color: rgba(157, 188, 148, 0.65);
-}
-
-/* 5. Liquid-glass panels below the intro */
-.content .panel,
-.content .stat-card,
-.content .engine-card {
-  background:
-    linear-gradient(145deg,
-      rgba(119, 146, 112, 0.055),
-      transparent 48%),
-    var(--stumps-glass);
-  border-color: var(--stumps-glass-border);
-  box-shadow:
-    0 12px 36px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(221, 235, 215, 0.045);
-  backdrop-filter: blur(16px) saturate(115%);
-  -webkit-backdrop-filter: blur(16px) saturate(115%);
-}
-
-/* Restrained reflections on existing panel headings */
-.content .panel-title {
-  border-bottom-color: rgba(159, 184, 155, 0.11);
-}
-
-.content .panel-icon {
-  color: var(--stumps-sage-light);
-  border-color: rgba(139, 172, 132, 0.22);
-  background: rgba(87, 123, 82, 0.09);
-}
-
-/* 6. Keep existing hover animations; recolour their shadows */
-.content .stat-card:hover {
-  border-color: rgba(139, 172, 132, 0.32);
-  box-shadow:
-    0 16px 38px rgba(0, 0, 0, 0.22),
-    0 0 24px rgba(91, 133, 83, 0.07);
-}
-
-.content .engine-card:hover {
-  border-color: rgba(139, 172, 132, 0.3);
-}
-
-/* 7. Green primary actions, preserving button interactions */
-.primary-button {
-  border-color: rgba(151, 181, 143, 0.3);
-  background: linear-gradient(135deg, #789372, #405b42);
-  color: #f1f3eb;
-}
-
-.primary-button:hover {
-  box-shadow: 0 8px 22px rgba(85, 125, 77, 0.22);
-}
-
-.secondary-button {
-  border-color: rgba(159, 184, 155, 0.2);
-  background: rgba(113, 140, 105, 0.07);
-}
-
-.secondary-button:hover {
-  border-color: rgba(159, 184, 155, 0.36);
-  background: rgba(113, 140, 105, 0.13);
-}
-
-/* 8. Green focus state for existing form controls */
-select:focus,
-input:focus,
-textarea:focus {
-  border-color: rgba(139, 172, 132, 0.55);
-  box-shadow: 0 0 0 1px rgba(139, 172, 132, 0.22);
-}
-
-/* 9. Existing progress and status effects use the new palette */
-.status-dot {
-  background: #91b18b;
-  box-shadow: 0 0 12px rgba(145, 177, 139, 0.55);
-}
-
-.leader-row:hover {
-  background: rgba(114, 160, 112, 0.07);
-}
-
-/* 10. Subtle scroll reveals for dashboard sections only.
-   Does not target .hero or change its existing effects. */
-@supports (animation-timeline: view()) {
-
-  .content>.configuration,
-  .content>.panel,
-  .content>.dashboard-grid {
-    animation: stumps-section-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 22%;
-  }
-
-  @keyframes stumps-section-reveal {
-    from {
-      opacity: 0.72;
-      transform: translateY(14px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* 11. Mobile glass and navigation support */
-@media (max-width: 700px) {
-  .tabs {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .content .panel,
-  .content .stat-card,
-  .content .engine-card {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-}
-
-/* Keep accessibility settings respected */
-@media (prefers-reduced-motion: reduce) {
-
-  .content>.configuration,
-  .content>.panel,
-  .content>.dashboard-grid {
-    animation: none;
-  }
-}
+.tab:hover {
+  color: var(--stumps-text);
